@@ -25,20 +25,20 @@ spec:
             - name: RabbitMqHost
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secret
+                  name: {{ .Values.secretKeyRef }}
                   key: RabbitMqHost
             - name: RabbitMqUsername
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secret
+                  name: {{ .Values.secretKeyRef }}
                   key: RabbitMqUsername
             - name: RabbitMqPassword
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secret
+                  name: {{ .Values.secretKeyRef }}
                   key: RabbitMqPassword
             - name: DatabaseConnectionString
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secret
+                  name: {{ .Values.secretKeyRef }}
                   key: ConsumerDatabaseConnectionString

@@ -27,20 +27,20 @@ spec:
             - name: EVENT_TRIANGLE_AD_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secret
+                  name: {{ .Values.secretKeyRef }}
                   key: EVENT_TRIANGLE_AD_CLIENT_SECRET
             - name: DatabaseConnectionString
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secret
+                  name: {{ .Values.secretKeyRef }}
                   key: AuthDatabaseConnectionString
             - name: RedisPassword
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secret
+                  name: {{ .Values.secretKeyRef }}
                   key: RedisPassword
             - name: RedisUrl
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secret
+                  name: {{ .Values.secretKeyRef }}
                   key: RedisUrl
