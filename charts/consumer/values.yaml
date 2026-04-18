@@ -4,7 +4,7 @@ replicaCount: 1
 image:
   # repository: kaminome/consumer-service
   repository: acrsharedd01.azurecr.io/consumer-service
-  tag: latest
+  tag: 1.0.1-PullRequest162.4-ebab5ab
   pullPolicy: Always
 
 secretKeyRef: "consumer-secrets"
