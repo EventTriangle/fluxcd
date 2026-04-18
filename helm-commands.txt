@@ -1,0 +1,99 @@
+=================================================================================================================================================================================================
+helm template auth-app .\auth-service-chart\ --values .\auth-service-chart\values.yaml --debug
+helm template auth-app .\auth-service-chart --values .\auth-service-chart\values.yaml --set namespace="template-namespace" --set entra_id_auth_secret=$env:EVENT_TRIANGLE_AD_CLIENT_SECRET --debug
+helm upgrade --install auth-app .\auth-service-chart --values .\auth-service-chart\values.yaml --set entra_id_auth_secret=$env:EVENT_TRIANGLE_AD_CLIENT_SECRET --namespace "event-triangle-dev" --create-namespace
+
+=================================================================================================================================================================================================
+
+helm template consumer-app .\consumer-service-chart\ --values .\consumer-service-chart\values.yaml --debug
+
+kubectl get secret rabbitmq-cluster-default-user -n rabbitmq-dev -o yaml
+
+kubectl get secret rabbitmq-cluster-default-user -n rabbitmq-dev -o jsonpath="{.data.password}"
+
+$creds=.\Get-RabbitMq-Credentials.ps1
+$username=$creds["username"]
+$password=$creds["password"]
+helm template consumer-app .\consumer-service-chart\ --values .\consumer-service-chart\values.yaml --set rabbitmq_username="$username" --set rabbitmq_password="$password" --debug
+
+helm upgrade --install consumer-app .\consumer-service-chart\ `
+	--values .\consumer-service-chart\values.yaml `
+	--set rabbitmq_username="$username" `
+	--set rabbitmq_password="$password" `
+	--namespace "event-triangle-dev" `
+	--create-namespace
+
+=================================================================================================================================================================================================
+
+helm template sender-app .\sender-service-chart\ --values .\sender-service-chart\values.yaml --debug
+
+helm template sender-app .\sender-service-chart\ --values .\sender-service-chart\values.yaml --set rabbitmq_username="$username" --set rabbitmq_password="$password" --debug
+
+$creds=.\Get-RabbitMq-Credentials.ps1
+$username=$creds["username"]
+$password=$creds["password"]
+
+
+helm upgrade --install sender-app .\sender-service-chart\ --values .\sender-service-chart\values.yaml --set rabbitmq_username="$username" --set rabbitmq_password="$password" --namespace "event-triangle-dev" --create-namespace
+
+
+=================================================================================================================================================================================================
+
+helm upgrade --install auth-app .\auth-service-chart\ --values .\auth-service-chart\values.yaml --namespace "event-triangle"
+
+helm upgrade --install consumer-app .\consumer-service-chart\ --values .\consumer-service-chart\values.yaml --namespace "event-triangle"
+
+helm template consumer-app .\consumer-service-chart\ --values .\consumer-service-chart\values.yaml --debug
+
+helm upgrade --install consumer-app .\consumer-service-chart\ --values .\consumer-service-chart\values.yaml --namespace "event-triangle"
+
+helm template sender-app .\sender-service-chart\ --values .\sender-service-chart\values.yaml --debug
+
+helm upgrade --install sender-app .\sender-service-chart\ --values .\sender-service-chart\values.yaml
+
+=================================================================================================================================================================================================
+
+helm upgrade --install auth-app .\auth-service-chart\ --values .\auth-service-chart\values.yaml --namespace "event-triangle"
+
+helm upgrade --install consumer-app .\consumer-service-chart\ --values .\consumer-service-chart\values.yaml --namespace "event-triangle"
+
+helm upgrade --install sender-app .\sender-service-chart\ --values .\sender-service-chart\values.yaml --namespace "event-triangle"
+
+=================================================================================================================================================================================================
+
+kubectl wait pod -n rabbitmq-dev -l app.kubernetes.io/name=rabbitmq-cluster --for=condition=Ready --timeout=300s
+kubectl get rabbitmqcluster "rabbitmq-cluster" -n "rabbitmq-dev" --ignore-not-found
+
+kubectl get rabbitmqcluster rabbitmq-cluster -n rabbitmq-dev -o jsonpath="{.status.conditions[?(@.type=='AllReplicasReady')].status}"
+
+=================================================================================================================================================================================================
+
+helm template pgsql-dev .\pgsql-helm\ --values .\pgsql-helm\values.yaml --debug
+
+helm upgrade --install pgsql-dev .\pgsql-helm\ --values .\pgsql-helm\values.yaml --namespace pgsql-dev --create-namespace
+
+kubectl create namespace pgsql-dev --dry-run=client -o yaml | kubectl apply -f -
+
+=================================================================================================================================================================================================
+
+curl -u :PAT "https://dev.azure.com/EventTriangle//EventTriangleAPI//_apis/distributedtask/variablegroups?api-version=7.0"
+
+=================================================================================================================================================================================================
+
+https://community.chocolatey.org/packages/flux
+
+choco install flux -y
+
+flux install --namespace flux-system --export | Out-File "flux-install.yaml"
+
+=================================================================================================================================================================================================
+
+flux reconcile source git flux-system -n flux-system
+
+flux reconcile helmrelease auth-release -n flux-system --with-source
+flux reconcile helmrelease consumer-release -n flux-system --with-source
+flux reconcile helmrelease sender-release -n flux-system --with-source
+
+=================================================================================================================================================================================================
+
+az acr manifest list-metadata acrsharedd01.azurecr.io/auth-service
