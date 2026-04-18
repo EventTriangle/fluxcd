@@ -24,9 +24,9 @@ spec:
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: Kubernetes
-            - name: CLUSTERS__CLUSTER1__DESTINATIONS__DESTINATION1__ADDRESS
+            - name: REVERSEPROXY__CLUSTERS__CLUSTER1__DESTINATIONS__DESTINATION1__ADDRESS
               value: "http://sender-release.event-triangle-dev.svc.cluster.local"
-            - name: CLUSTERS__CLUSTER2__DESTINATIONS__DESTINATION1__ADDRESS
+            - name: REVERSEPROXY__CLUSTERS__CLUSTER2__DESTINATIONS__DESTINATION1__ADDRESS
               value: "http://consumer-release.event-triangle-dev.svc.cluster.local"
             - name: GrpcChannelAddresses
               value: {{ .Values.GrpcChannelAddresses }}
