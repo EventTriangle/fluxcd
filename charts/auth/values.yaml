@@ -3,10 +3,12 @@ replicaCount: 1
 
 secretKeyRef: "auth-secrets"
 
+GrpcChannelAddresses: "http://sender-release-service.event-triangle-dev.svc.cluster.local:81"
+
 image:
   # repository: kaminome/auth-service
   repository: acrsharedd01.azurecr.io/auth-service
-  tag: latest
+  tag: "0.0.1-AZ400-305.1"
   pullPolicy: Always
 
 ports:

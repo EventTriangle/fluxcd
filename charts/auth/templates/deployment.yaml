@@ -23,9 +23,9 @@ spec:
           {{- end }}
           env:
             - name: ASPNETCORE_ENVIRONMENT
-              value: "Docker"
+              value: Kubernetes
             - name: GrpcChannelAddresses
-              value: "http://sender-release-service.event-triangle-dev.svc.cluster.local:81"
+              value: {{ .Values.GrpcChannelAddresses }}
             - name: EVENT_TRIANGLE_AD_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:

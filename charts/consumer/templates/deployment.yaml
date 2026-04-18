@@ -21,7 +21,7 @@ spec:
             - containerPort: {{ .Values.ports.containerPort }}
           env:
             - name: ASPNETCORE_ENVIRONMENT
-              value: "Docker"
+              value: Kubernetes
             - name: RabbitMqHost
               valueFrom:
                 secretKeyRef:

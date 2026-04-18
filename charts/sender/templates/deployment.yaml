@@ -23,7 +23,11 @@ spec:
           {{- end }}
           env:
             - name: ASPNETCORE_ENVIRONMENT
-              value: "Docker"
+              value: Kubernetes
+            - name: CLUSTERS__CLUSTER1__DESTINATIONS__DESTINATION1__ADDRESS
+              value: "http://sender-release.event-triangle-dev.svc.cluster.local"
+            - name: CLUSTERS__CLUSTER2__DESTINATIONS__DESTINATION1__ADDRESS
+              value: "http://consumer-release.event-triangle-dev.svc.cluster.local"
             - name: RabbitMqHost
               valueFrom:
                 secretKeyRef:
