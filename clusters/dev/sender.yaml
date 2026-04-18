@@ -9,5 +9,5 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: flux-system
-  targetNamespace: default
+    name: github-source
+  targetNamespace: event-triangle-dev

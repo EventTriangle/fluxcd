@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: sender-release
-  namespace: default
+  namespace: event-triangle-dev
 spec:
   interval: 5m
   chart:
@@ -10,7 +10,7 @@ spec:
       chart: ./charts/sender
       sourceRef:
         kind: GitRepository
-        name: flux-system
+        name: github-source
         namespace: flux-system
       interval: 1m
   values:
