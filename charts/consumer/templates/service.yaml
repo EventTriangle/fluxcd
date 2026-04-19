@@ -7,7 +7,10 @@ spec:
   selector:
     app: {{ .Release.Name }}
   ports:
-    - protocol: TCP
-      port: {{ .Values.ports.servicePort }}
-      targetPort: {{ .Values.ports.targetPort }}
-  type: ClusterIP
+  {{- range .Values.service.ports }}
+    - name: {{ .name }}
+      protocol: TCP
+      port: {{ .port }}
+      targetPort: {{ .targetPort }}
+  {{- end }}
+  type: {{ .Values.service.type }}

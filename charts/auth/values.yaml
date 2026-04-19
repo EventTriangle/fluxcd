@@ -5,11 +5,10 @@ GrpcChannelAddresses: "http://sender-release-service.event-triangle-dev.svc.clus
 image:
   # repository: kaminome/auth-service
   repository: acrsharedd01.azurecr.io/auth-service
-  tag: "1.0.1-PullRequest162.6-d28a8d8"
+  tag: "latest"
   pullPolicy: Always
 ports:
   - containerPort: 80
-  - containerPort: 81
 service:
   type: ClusterIP
   ports:
@@ -17,7 +16,3 @@ service:
       protocol: TCP
       port: 80
       targetPort: 8080
-    - name: grpc
-      protocol: TCP
-      port: 81
-      targetPort: 81
