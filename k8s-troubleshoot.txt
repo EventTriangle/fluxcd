@@ -3,3 +3,5 @@ kubectl exec -it auth-release-deployment-7d5bc7d976-8r8d5 -n event-triangle-dev 
 kubectl run curl-test --image=curlimages/curl:8.5.0 -it --rm -n event-triangle-dev -- sh
 
 curl -v --http2-prior-knowledge http://sender-release-service:81
+
+kubectl delete pod auth-release-deployment-6955c8866f-tpq4q auth-release-deployment-6c6bfc6699-bbrwg --grace-period=0 --force
