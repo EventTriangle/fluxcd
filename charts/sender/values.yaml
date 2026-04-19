@@ -4,7 +4,7 @@ secretKeyRef: "sender-secrets"
 image:
   # repository: kaminome/sender-service
   repository: acrsharedd01.azurecr.io/sender-service
-  tag: 1.0.1-PullRequest162.7-ab3ac42
+  tag: 1.0.1-PullRequest162.8-1e9b400
   pullPolicy: Always
 service:
   ports:
