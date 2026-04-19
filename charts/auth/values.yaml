@@ -1,20 +1,15 @@
 namespace: event-triangle-dev
 replicaCount: 1
-
 secretKeyRef: "auth-secrets"
-
 GrpcChannelAddresses: "http://sender-release-service.event-triangle-dev.svc.cluster.local:81"
-
 image:
   # repository: kaminome/auth-service
   repository: acrsharedd01.azurecr.io/auth-service
-  tag: "1.0.1-PullRequest162.4-ebab5ab"
+  tag: "1.0.1-PullRequest162.5-dbbf664"
   pullPolicy: Always
-
 ports:
   - containerPort: 80
   - containerPort: 81
-
 service:
   type: ClusterIP
   ports:
