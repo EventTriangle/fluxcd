@@ -2,6 +2,7 @@ namespace: event-triangle-dev
 replicaCount: 1
 secretKeyRef: "auth-secrets"
 GrpcChannelAddresses: "http://sender-release-service.event-triangle-dev.svc.cluster.local:81"
+baseUrl: "https://auth-eventtriangle.razumovsky.me/"
 image:
   # repository: kaminome/auth-service
   repository: acrsharedd01.azurecr.io/auth-service

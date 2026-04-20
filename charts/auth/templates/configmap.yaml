@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  config.json: |-
+    {
+      "baseUrl": {{ .Values.baseUrl | quote }}
+    }
+kind: ConfigMap
+metadata:
+  name: auth-config
+  namespace: {{ .Values.namespace }}

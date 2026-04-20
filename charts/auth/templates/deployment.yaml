@@ -17,6 +17,9 @@ spec:
         - name: {{ .Release.Name }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/wwwroot/assets/config
           ports:
           {{- range .Values.ports }}
             - containerPort: {{ .containerPort }}
@@ -50,3 +53,7 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.secretKeyRef }}
                   key: RedisUrl
+      volumes:
+        - name: config-volume
+          configMap:
+            name: auth-config
