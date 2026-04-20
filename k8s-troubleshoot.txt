@@ -5,3 +5,14 @@ kubectl run curl-test --image=curlimages/curl:8.5.0 -it --rm -n event-triangle-d
 curl -v --http2-prior-knowledge http://sender-release-service:81
 
 kubectl delete pod auth-release-deployment-6955c8866f-tpq4q auth-release-deployment-6c6bfc6699-bbrwg --grace-period=0 --force
+
+kubectl exec -it auth-release-deployment-946dcbcb4-n7vc7 -n event-triangle-dev -- /bin/sh
+
+cd wwwroot/assets/config/config.json
+
+# cat config.json
+{
+  "baseUrl": "https://localhost:7000/"
+}#
+
+kubectl create configmap auth-config --from-file=config.json -n event-triangle-dev --dry-run=client -o yaml
