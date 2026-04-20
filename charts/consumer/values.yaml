@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   # repository: kaminome/consumer-service
   repository: acrsharedd01.azurecr.io/consumer-service
-  tag: 1.0.1-PullRequest166.38-cf285fe
+  tag: 1.0.1-PullRequest166.39-4488414
   pullPolicy: Always
 secretKeyRef: "consumer-secrets"
 ports:

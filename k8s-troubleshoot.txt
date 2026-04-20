@@ -9,6 +9,7 @@ kubectl delete pod auth-release-deployment-6955c8866f-tpq4q auth-release-deploym
 kubectl exec -it auth-release-deployment-946dcbcb4-n7vc7 -n event-triangle-dev -- /bin/sh
 
 cd wwwroot/assets/config/config.json
+cat wwwroot/assets/config/config.json
 
 # cat config.json
 {
