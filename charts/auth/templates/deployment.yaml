@@ -19,7 +19,8 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - name: config-volume
-              mountPath: /app/wwwroot/assets/config
+              mountPath: /app/wwwroot/assets/config/config.json
+              subPath: config.json
           ports:
           {{- range .Values.ports }}
             - containerPort: {{ .containerPort }}
