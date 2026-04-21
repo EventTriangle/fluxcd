@@ -6,6 +6,10 @@ curl -v --http2-prior-knowledge http://sender-release-service:81
 
 kubectl delete pod auth-release-deployment-6955c8866f-tpq4q auth-release-deployment-6c6bfc6699-bbrwg --grace-period=0 --force
 
+################################################################################################################################################
+# CONFIG MAP SETUP
+################################################################################################################################################
+
 kubectl exec -it auth-release-deployment-946dcbcb4-n7vc7 -n event-triangle-dev -- /bin/sh
 
 cd wwwroot/assets/config/config.json
@@ -17,3 +21,10 @@ cat wwwroot/assets/config/config.json
 }#
 
 kubectl create configmap auth-config --from-file=config.json -n event-triangle-dev --dry-run=client -o yaml
+
+kubectl run curl-test --image=curlimages/curl:8.5.0 -it --rm -n event-triangle-dev -- sh
+curl -v http://auth-release-service/assets/config/config.json
+
+cat wwwroot/assets/config/config.json | wc -c
+
+stat wwwroot/assets/config/config.json
