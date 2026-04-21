@@ -13,6 +13,10 @@ spec:
       labels:
         app: {{ .Release.Name }}
     spec:
+      volumes:
+        - name: config-volume
+          configMap:
+            name: auth-config
       containers:
         - name: {{ .Release.Name }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
@@ -54,7 +58,3 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.secretKeyRef }}
                   key: RedisUrl
-      volumes:
-        - name: config-volume
-          configMap:
-            name: auth-config
